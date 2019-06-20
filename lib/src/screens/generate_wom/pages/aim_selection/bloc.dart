@@ -1,6 +1,5 @@
 import 'package:instrument/src/db/app_db.dart';
 import 'package:wom_package/wom_package.dart';
-import 'package:instrument/src/services/aim/repository.dart';
 import 'package:rxdart/rxdart.dart';
 
 class AimSelectionBloc {

@@ -2,14 +2,14 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:instrument/src/screens/generate_wom/bloc.dart';
+import 'package:instrument/src/blocs/home/bloc.dart';
 import 'package:instrument/src/screens/generate_wom/pages/aim_selection/aim_selection_page.dart';
 import 'package:instrument/src/screens/generate_wom/pages/name_selection/name_selection.dart';
 import 'package:instrument/src/screens/generate_wom/pages/pin_selection/pin_page.dart';
 import 'package:instrument/src/screens/generate_wom/pages/position_selection/position_selection_page.dart';
 import 'package:instrument/src/screens/generate_wom/pages/amount_selection/amount_selection_page.dart';
-import 'package:instrument/src/screens/home/bloc.dart';
-import 'package:instrument/src/screens/home/home_event.dart';
+
+import 'bloc.dart';
 
 class GenerateWomScreen extends StatefulWidget {
   @override
@@ -18,7 +18,7 @@ class GenerateWomScreen extends StatefulWidget {
 
 class _GenerateWomScreenState extends State<GenerateWomScreen> {
   int page = 0;
-  GenerateWomBloc bloc;
+  GenerateWomBloc generateWomBloc;
   HomeBloc homeBloc;
 
   @override
@@ -27,16 +27,16 @@ class _GenerateWomScreenState extends State<GenerateWomScreen> {
   }
 
   Future<bool> onWillPop() {
-    if (bloc.pageController.page.round() == bloc.pageController.initialPage) {
+    if (generateWomBloc.pageController.page.round() == generateWomBloc.pageController.initialPage) {
       return Future.value(true);
     }
-    bloc.goToPreviousPage();
+    generateWomBloc.goToPreviousPage();
     return Future.value(false);
   }
 
   @override
   Widget build(BuildContext context) {
-    bloc = BlocProvider.of<GenerateWomBloc>(context);
+    generateWomBloc = BlocProvider.of<GenerateWomBloc>(context);
     homeBloc = BlocProvider.of<HomeBloc>(context);
     return WillPopScope(
       onWillPop: onWillPop,
@@ -46,7 +46,7 @@ class _GenerateWomScreenState extends State<GenerateWomScreen> {
           body: Stack(
             children: <Widget>[
               PageView(
-                controller: bloc.pageController,
+                controller: generateWomBloc.pageController,
                 physics: new NeverScrollableScrollPhysics(),
                 children: <Widget>[
                   NameSelectionPage(),
@@ -65,7 +65,7 @@ class _GenerateWomScreenState extends State<GenerateWomScreen> {
                     color: Colors.white,
                   ),
                   onPressed: () {
-                    if (bloc.pageController.page.round() != 0) {
+                    if (generateWomBloc.pageController.page.round() != 0) {
                        showAlert(context);
                     }else{
                       Navigator.of(context).pop();
@@ -109,7 +109,7 @@ class _GenerateWomScreenState extends State<GenerateWomScreen> {
 
 
     if (result ?? false) {
-      await bloc.saveDraftRequest();
+      await generateWomBloc.saveDraftRequest();
       homeBloc.dispatch(LoadRequest());
     }
     Navigator.of(context).pop();
@@ -117,7 +117,7 @@ class _GenerateWomScreenState extends State<GenerateWomScreen> {
 
   @override
   void dispose() {
-    bloc.dispose();
+    generateWomBloc.dispose();
     super.dispose();
   }
 }

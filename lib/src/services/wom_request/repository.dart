@@ -6,6 +6,8 @@ import 'package:instrument/src/services/wom_request/api.dart';
 import 'package:simple_rsa/simple_rsa.dart';
 import 'package:wom_package/wom_package.dart';
 
+import '../../../app.dart';
+
 class WomRequestRepository {
   WomRequestApiProvider _apiProvider;
 
@@ -23,8 +25,13 @@ class WomRequestRepository {
       //encode map to json string
       final payloadMapEncoded = json.encode(payloadMap);
 
-      final privateKeyString = await _loadKey('assets/source.pem');
+//      final privateKeyString1 = await _loadKey('assets/source.pem');
+      final privateKeyString = user.privateKey;
       final publicKeyString = await _loadKey('assets/registry.pub');
+//      final publicKeyString = user.publicKey;
+
+//      assert(publicKeyString == publicKeyString1);
+//      assert(privateKeyString == privateKeyString1);
 
       final encrypted = await encryptString(payloadMapEncoded, publicKeyString);
 
@@ -64,6 +71,8 @@ class WomRequestRepository {
     try {
       final String payloadMapEncoded = json.encode(payloadMap);
       final String publicKeyString = await _loadKey('assets/registry.pub');
+//      final String publicKeyString = user.publicKey;
+//      assert(publicKeyString == publicKeyString1);
       final String payloadEncrypted =
           await encryptString(payloadMapEncoded, publicKeyString);
 

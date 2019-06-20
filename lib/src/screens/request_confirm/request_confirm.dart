@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:instrument/src/blocs/home/bloc.dart';
 import 'package:instrument/src/model/wom_request.dart';
-import 'package:instrument/src/screens/home/bloc.dart';
-import 'package:instrument/src/screens/home/home_event.dart';
 import 'package:instrument/src/screens/request_confirm/bloc.dart';
 import 'package:instrument/src/screens/request_confirm/summary_request.dart';
 import 'package:instrument/src/screens/request_confirm/wom_creation_event.dart';
 import 'package:instrument/src/screens/request_confirm/wom_creation_state.dart';
-import 'package:qr_flutter/qr_flutter.dart';
 
 class RequestConfirmScreen extends StatefulWidget {
   final WomRequest womRequest;
@@ -44,7 +42,9 @@ class _RequestConfirmScreenState extends State<RequestConfirmScreen> {
     return WillPopScope(
       onWillPop: onWillPop,
       child: Scaffold(
-        appBar: AppBar(title: Text(bloc.womRequest.name),),
+        appBar: AppBar(
+          title: Text(bloc.womRequest.name),
+        ),
         body: BlocBuilder(
           bloc: bloc,
           builder: (_, WomCreationState state) {
@@ -60,7 +60,15 @@ class _RequestConfirmScreenState extends State<RequestConfirmScreen> {
               );
             }
 
+            if (state is WomVerifyCreationRequestComplete) {
+              isComplete = true;
+              return SummaryRequest(
+                womRequest: bloc.womRequest,
+              );
+            }
+
             if (state is WomCreationRequestError) {
+              isComplete = true;
               return Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 mainAxisSize: MainAxisSize.max,
@@ -68,19 +76,16 @@ class _RequestConfirmScreenState extends State<RequestConfirmScreen> {
                   Text(state.error),
                   OutlineButton(
                       child: Text('RIPROVA!'),
-                      onPressed: (){
-                    bloc.dispatch(CreateWomRequest());
-                  })
+                      onPressed: () {
+                        bloc.dispatch(CreateWomRequest());
+                      })
                 ],
               );
             }
 
-            if (state is WomVerifyCreationRequestComplete) {
-              isComplete = true;
-              return SummaryRequest(
-                womRequest: bloc.womRequest,
-              );
-            }
+            return Container(
+              child: Center(child: Text("ERROR SCREEN STATE")),
+            );
           },
         ),
       ),

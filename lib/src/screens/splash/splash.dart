@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:instrument/src/screens/home/bloc.dart';
-import 'package:instrument/src/screens/home/home.dart';
-import 'package:instrument/src/screens/login/login_screen.dart';
 import 'package:instrument/src/screens/splash/bloc.dart';
 
 class SplashScreen extends StatelessWidget {

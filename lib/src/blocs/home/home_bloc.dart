@@ -1,19 +1,15 @@
 import 'package:bloc/bloc.dart';
-import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:instrument/src/blocs/home/home_event.dart';
+import 'package:instrument/src/blocs/home/home_state.dart';
 import 'package:instrument/src/db/app_db.dart';
 import 'package:instrument/src/db/wom_request_db.dart';
 import 'package:instrument/src/model/wom_request.dart';
-import 'package:instrument/src/screens/home/home_event.dart';
-import 'package:instrument/src/screens/home/home_state.dart';
-import 'package:instrument/src/services/aim/repository.dart';
 import 'package:wom_package/wom_package.dart';
-
 
 class HomeBloc extends Bloc<HomeEvent, HomeState> {
   TextEditingController amountController = TextEditingController();
-
   AimRepository _aimRepository;
   WomRequestDb _requestDb;
 

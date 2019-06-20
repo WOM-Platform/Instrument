@@ -16,9 +16,3 @@ String generateGUID(){
   final guid = uuid.v1buffer(List(16));
   return Base64Encoder().convert(guid);
 }
-
-onWidgetDidBuild(Function callback) {
-  WidgetsBinding.instance.addPostFrameCallback((_) {
-    callback();
-  });
-}

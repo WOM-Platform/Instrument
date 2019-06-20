@@ -1,16 +1,13 @@
-import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:instrument/src/model/wom_request.dart';
+import 'package:instrument/src/blocs/home/bloc.dart';
 import 'package:instrument/src/screens/generate_wom/bloc.dart';
 import 'package:instrument/src/screens/generate_wom/generate_wom.dart';
-import 'package:instrument/src/screens/home/bloc.dart';
-import 'package:instrument/src/screens/home/home_event.dart';
 import 'package:instrument/src/screens/home/widgets/home_list.dart';
-import 'package:instrument/src/screens/home/home_state.dart';
-import 'package:instrument/src/screens/login/authentication_bloc.dart';
-import 'package:instrument/src/screens/login/authentication_event.dart';
+import 'package:wom_package/wom_package.dart';
+
+import '../../../app.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -65,11 +62,14 @@ class _HomeScreenState extends State<HomeScreen> {
               requests: state.requests,
             );
           }
+
+          return Container(child: Center(child: Text("Error screen")),);
         },
       ),
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
         onPressed: () async {
+          print(user.publicKey);
           final provider = BlocProvider(
             child: GenerateWomScreen(),
             bloc: GenerateWomBloc(draftRequest: null),
@@ -84,7 +84,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   void dispose() {
-    bloc.dispose();
     super.dispose();
   }
 }
