@@ -38,6 +38,7 @@ class _AppState extends State<App> {
         BlocProvider<HomeBloc>(bloc: homeBloc),
       ],
       child: MaterialApp(
+        theme: ThemeData(primaryColor: Colors.green,accentColor: Colors.yellow),
         home: BlocBuilder<AuthenticationEvent, AuthenticationState>(
           bloc: authenticationBloc,
           builder: (BuildContext context, AuthenticationState state) {

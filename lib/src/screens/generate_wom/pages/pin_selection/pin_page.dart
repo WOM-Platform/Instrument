@@ -115,7 +115,7 @@ class _Page4State extends State<Page4> {
           ),
         ),
         floatingActionButton: isValid
-            ? FloatingActionButton(
+            ? FloatingActionButton(child: Icon(Icons.arrow_forward_ios),
                 onPressed: () {
                   goToRequestScreen();
                 },

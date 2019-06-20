@@ -100,9 +100,7 @@ class _PositionSelectionPageState extends State<PositionSelectionPage> {
     _controller.complete(mapController);
   }
 
-  void _updateCameraPosition(CameraPosition position) {
-
-  }
+  void _updateCameraPosition(CameraPosition position) {}
 
   _updateMyLocation() async {
     print("_updateMyLocation");
@@ -236,6 +234,7 @@ class _PositionSelectionPageState extends State<PositionSelectionPage> {
         ),
         floatingActionButton: isValid
             ? FloatingActionButton(
+                child: Icon(Icons.arrow_forward_ios),
                 onPressed: () {
                   bloc.saveCurrentPosition();
                   goToRequestScreen();
