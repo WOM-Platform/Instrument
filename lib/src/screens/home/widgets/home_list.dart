@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:instrument/src/blocs/home/bloc.dart';
 import 'package:instrument/src/model/wom_request.dart';
 import 'package:instrument/src/screens/generate_wom/bloc.dart';
@@ -25,6 +26,58 @@ class _HomeListState extends State<HomeList> {
   @override
   Widget build(BuildContext context) {
     bloc = BlocProvider.of<HomeBloc>(context);
+
+    return ListView.builder(
+        itemCount: widget.requests.length,
+        itemBuilder: (context, index) {
+          return GestureDetector(
+            onTap: widget.requests[index].status == RequestStatus.COMPLETE
+                ? () => goToDetails(index)
+                : null,
+            child: Slidable(
+              actionPane: SlidableDrawerActionPane(),
+              actionExtentRatio: 0.25,
+              child: CardRequest2(
+                request: widget.requests[index],
+                onDelete: () => onDelete(index),
+                onEdit: () => onEdit(index),
+                onDuplicate: () => onDuplicate(index),
+              ),
+              actions: <Widget>[
+                MySlideAction(
+                  icon: Icons.share,
+                  color: Colors.green,
+                  onTap: () => _showSnackBar(context, 'Share'),
+                ),
+                widget.requests[index].status == RequestStatus.COMPLETE
+                    ? MySlideAction(
+                  icon: Icons.control_point_duplicate,
+                  color: Colors.indigo,
+                  onTap: () => onDuplicate(index),
+                )
+                    : MySlideAction(
+                  icon: Icons.edit,
+                  color: Colors.orange,
+                  onTap: () => onEdit(index),
+                ),
+
+              ],
+              secondaryActions: <Widget>[
+                MySlideAction(
+                  icon: Icons.archive,
+                  color: Colors.yellow,
+                  onTap: () => _showSnackBar(context, 'Archive'),
+                ),
+                MySlideAction(
+                  icon: Icons.delete,
+                  color: Colors.red,
+                  onTap: () => onDelete(index),
+                ),
+              ],
+            ),
+          );
+        });
+
     return ListView.builder(
         itemCount: widget.requests.length,
         itemBuilder: (context, index) {
@@ -39,6 +92,11 @@ class _HomeListState extends State<HomeList> {
           );
         });
   }
+
+  void _showSnackBar(BuildContext context, String text) {
+    Scaffold.of(context).showSnackBar(SnackBar(content: Text(text)));
+  }
+
 
   goToDetails(int index) {
     Navigator.of(context).push(
@@ -63,7 +121,7 @@ class _HomeListState extends State<HomeList> {
   onEdit(int index) {
     final provider = BlocProvider(
       child: GenerateWomScreen(),
-      bloc: GenerateWomBloc(draftRequest: widget.requests[index]),
+      builder:(context)=>  GenerateWomBloc(draftRequest: widget.requests[index]),
     );
     Navigator.of(context).push(MaterialPageRoute(builder: (ctx) => provider));
   }
@@ -79,3 +137,37 @@ class _HomeListState extends State<HomeList> {
     }
   }
 }
+
+class MySlideAction extends StatelessWidget {
+  final Function onTap;
+  final IconData icon;
+  final Color color;
+
+  const MySlideAction({Key key, this.onTap, this.icon, this.color})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return SlideAction(
+      child: Container(
+        width: double.infinity,
+        height: double.infinity,
+        padding: const EdgeInsets.symmetric(vertical: 4.0),
+        child: Card(
+          color: color,
+          elevation: 8.0,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(15.0),
+          ),
+          child: Icon(
+            icon,
+            color: Colors.white,
+          ),
+        ),
+      ),
+      onTap: onTap,
+    );
+  }
+}
+
+

@@ -26,7 +26,7 @@ class _AimSelectionPageState extends State<AimSelectionPage> {
         },
         child: Scaffold(
           resizeToAvoidBottomInset: false,
-          backgroundColor: Colors.green,
+          backgroundColor: Theme.of(context).primaryColor,
           body: Padding(
             padding: const EdgeInsets.all(8.0),
             child: ListView(
@@ -37,7 +37,7 @@ class _AimSelectionPageState extends State<AimSelectionPage> {
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Text(
-                    "Per quale causa stai generando i WOM?",
+                    "What\'s the AIM?",
                     textAlign: TextAlign.start,
                     style: TextStyle(
                         color: Colors.white,
@@ -61,7 +61,7 @@ class _AimSelectionPageState extends State<AimSelectionPage> {
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Text(
-                    lorem,
+                    "Select the AIM of the WOMs being generated",
                     style: TextStyle(
                         color: Colors.white,
                         fontSize: 20.0,

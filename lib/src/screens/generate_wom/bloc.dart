@@ -48,7 +48,7 @@ class GenerateWomBloc extends Bloc {
     final WomRequest womRequest = WomRequest(
       sourceId: "1",
 //      password: password,
-      dateTime: DateTime.now(),
+      dateTime: DateTime.now().toUtc(),
       amount: _amount,
       aim: aim,
       aimName: aim?.title,

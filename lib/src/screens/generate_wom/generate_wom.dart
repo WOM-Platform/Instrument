@@ -27,7 +27,8 @@ class _GenerateWomScreenState extends State<GenerateWomScreen> {
   }
 
   Future<bool> onWillPop() {
-    if (generateWomBloc.pageController.page.round() == generateWomBloc.pageController.initialPage) {
+    if (generateWomBloc.pageController.page.round() ==
+        generateWomBloc.pageController.initialPage) {
       return Future.value(true);
     }
     generateWomBloc.goToPreviousPage();
@@ -36,14 +37,17 @@ class _GenerateWomScreenState extends State<GenerateWomScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final padding = MediaQuery.of(context).padding;
     generateWomBloc = BlocProvider.of<GenerateWomBloc>(context);
     homeBloc = BlocProvider.of<HomeBloc>(context);
     return WillPopScope(
       onWillPop: onWillPop,
-      child: SafeArea(
-        child: Scaffold(
-          resizeToAvoidBottomInset: false,
-          body: Stack(
+      child: Scaffold(
+        backgroundColor: Theme.of(context).primaryColor,
+        resizeToAvoidBottomInset: false,
+        body: Padding(
+          padding: padding,
+          child: Stack(
             children: <Widget>[
               PageView(
                 controller: generateWomBloc.pageController,
@@ -66,8 +70,8 @@ class _GenerateWomScreenState extends State<GenerateWomScreen> {
                   ),
                   onPressed: () {
                     if (generateWomBloc.pageController.page.round() != 0) {
-                       showAlert(context);
-                    }else{
+                      showAlert(context);
+                    } else {
                       Navigator.of(context).pop();
                     }
                   },
@@ -81,7 +85,6 @@ class _GenerateWomScreenState extends State<GenerateWomScreen> {
   }
 
   showAlert(BuildContext context) async {
-
     bool result = await showDialog(
       context: context,
       builder: (ctx) {
@@ -106,7 +109,6 @@ class _GenerateWomScreenState extends State<GenerateWomScreen> {
         );
       },
     );
-
 
     if (result ?? false) {
       await generateWomBloc.saveDraftRequest();

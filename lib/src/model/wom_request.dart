@@ -126,7 +126,7 @@ class WomRequest {
   WomRequest copyFrom() {
     return WomRequest(
       amount: this.amount,
-      dateTime: DateTime.now(),
+      dateTime: DateTime.now().toUtc(),
       password: this.password,
       registryUrl: this.registryUrl,
       name: this.name,

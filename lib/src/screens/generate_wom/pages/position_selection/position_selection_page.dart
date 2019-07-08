@@ -146,7 +146,7 @@ class _PositionSelectionPageState extends State<PositionSelectionPage> {
     Marker marker = Marker(
       markerId: MarkerId("my_position"),
       position: bloc.currentPosition ?? bloc.lastPosition,
-      infoWindow: InfoWindow(title: 'Request Location', snippet: '*'),
+//      infoWindow: InfoWindow(title: 'Request Location', snippet: '*'),
     );
 
     final GoogleMap googleMap = GoogleMap(
@@ -171,15 +171,16 @@ class _PositionSelectionPageState extends State<PositionSelectionPage> {
 
     return SafeArea(
       child: Scaffold(
-        backgroundColor: Colors.green,
+        backgroundColor:Theme.of(context).primaryColor,
         body: Column(
           children: <Widget>[
-            Container(
-              height: 180.0,
+            SizedBox(
+              height: 30.0,
+            ),
+            Padding(
               padding: const EdgeInsets.all(8.0),
-              alignment: Alignment.center,
               child: Text(
-                "Seleziona un punto sulla mappa",
+                "Where the WOMs are being generated?",
                 textAlign: TextAlign.start,
                 style: TextStyle(
                     color: Colors.white,

@@ -26,7 +26,7 @@ class MyDropdown extends StatelessWidget {
             ),
             border: OutlineInputBorder(),
             filled: true,
-            fillColor: Colors.green,
+            fillColor:  Theme.of(context).primaryColor,
         ),
         child: DropdownButtonHideUnderline(
           child: DropdownButton(

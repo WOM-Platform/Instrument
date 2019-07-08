@@ -24,7 +24,7 @@ class _Page4State extends State<Page4> {
       },
       child: Scaffold(
         resizeToAvoidBottomInset: false,
-        backgroundColor: Colors.green,
+        backgroundColor:Theme.of(context).primaryColor,
         body: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Column(

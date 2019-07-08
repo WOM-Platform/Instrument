@@ -24,7 +24,7 @@ class _AmountSelectionPageState extends State<AmountSelectionPage> {
         },
         child: Scaffold(
           resizeToAvoidBottomInset: false,
-          backgroundColor: Colors.green,
+          backgroundColor:Theme.of(context).primaryColor,
           body: Padding(
             padding: const EdgeInsets.all(8.0),
             child: Column(
@@ -36,7 +36,7 @@ class _AmountSelectionPageState extends State<AmountSelectionPage> {
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Text(
-                    "Quanti WOM\nvuoi generare?",
+                    "How many WOMs do you need?",
                     textAlign: TextAlign.start,
                     style: TextStyle(
                         color: Colors.white,
@@ -71,6 +71,11 @@ class _AmountSelectionPageState extends State<AmountSelectionPage> {
                     decoration: InputDecoration(
                       fillColor: Colors.white,
                       filled: true,
+                      focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.yellow)),
+                      errorBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.red)),
+                      errorStyle: TextStyle(color: Colors.yellow),
                       labelStyle: TextStyle(color: Colors.white),
                       hintStyle: TextStyle(color: Colors.grey[400]),
                       border: OutlineInputBorder(),
@@ -79,19 +84,19 @@ class _AmountSelectionPageState extends State<AmountSelectionPage> {
                     ),
                   ),
                 ),
-                SizedBox(
-                  height: 10.0,
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text(
-                    lorem,
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 20.0,
-                        fontWeight: FontWeight.w500),
-                  ),
-                ),
+//                SizedBox(
+//                  height: 10.0,
+//                ),
+//                Padding(
+//                  padding: const EdgeInsets.all(8.0),
+//                  child: Text(
+//                    lorem,
+//                    style: TextStyle(
+//                        color: Colors.white,
+//                        fontSize: 20.0,
+//                        fontWeight: FontWeight.w500),
+//                  ),
+//                ),
                 Spacer(),
                 Container(
                   margin: const EdgeInsets.only(left: 20.0),

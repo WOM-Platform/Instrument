@@ -10,7 +10,11 @@ class RequestDetails extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text(womRequest.name),),
+      appBar: AppBar(
+        title: Text(womRequest.name),
+        centerTitle: true,
+        elevation: 0.0,
+      ),
       body: SummaryRequest(
         womRequest: womRequest,
       ),

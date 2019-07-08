@@ -21,7 +21,7 @@ class SelectAim extends StatelessWidget {
                 MyDropdown(
                   list: bloc.aimList,
                   value: snapshot.data,
-                  labelText: 'Aim di primo livello',
+                  labelText: 'Primary AIM',
                   onChanged: (String aim) {
                     bloc.changeSelectedAimRoot(aim);
                     bloc.subAimCode = null;
@@ -32,7 +32,7 @@ class SelectAim extends StatelessWidget {
                     ? MyDropdown(
                         list: bloc.subAimList,
                         value: bloc.subAimCode,
-                        labelText: 'Aim di secondo livello',
+                        labelText: 'Secondary AIM',
                         onChanged: (String aimCode) {
                           bloc.changeSelectedAimRoot(aimCode.substring(0, 1));
                           bloc.subAimCode = aimCode;
@@ -48,7 +48,7 @@ class SelectAim extends StatelessWidget {
                     ? MyDropdown(
                         list: bloc.subSubAimList,
                         value: bloc.subSubAimCode,
-                        labelText: 'Aim di terzo livello',
+                        labelText: 'Tertiary AIM',
                         onChanged: (aim) {
                           bloc.changeSelectedAimRoot(aim.substring(0, 1));
                           bloc.subSubAimCode = aim;

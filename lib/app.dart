@@ -34,11 +34,25 @@ class _AppState extends State<App> {
   Widget build(BuildContext context) {
     return BlocProviderTree(
       blocProviders: [
-        BlocProvider<AuthenticationBloc>(bloc: authenticationBloc),
-        BlocProvider<HomeBloc>(bloc: homeBloc),
+        BlocProvider<AuthenticationBloc>(
+            builder: (context) => authenticationBloc),
+        BlocProvider<HomeBloc>(builder: (context) => homeBloc),
       ],
       child: MaterialApp(
-        theme: ThemeData(primaryColor: Colors.green,accentColor: Colors.yellow),
+        theme: ThemeData(
+          primaryColor: Colors.green,
+//          primaryColorDark: Color(0xFFF57C00),
+//          primaryColorLight: Color(0xFFFFE0B2),
+          accentColor: Colors.orange,
+//          iconTheme: IconThemeData(color: Color(0xFF212121)),
+//          primaryTextTheme: TextTheme(
+//            title: TextStyle(
+//              color: Color(0xFF212121),
+//            ),
+//
+//          ),
+//          dividerColor: Color(0xFFBDBDBD),
+        ),
         home: BlocBuilder<AuthenticationEvent, AuthenticationState>(
           bloc: authenticationBloc,
           builder: (BuildContext context, AuthenticationState state) {
