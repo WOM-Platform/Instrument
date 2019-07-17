@@ -1,7 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:instrument/src/model/wom_request.dart';
-import 'package:instrument/src/model/wom_request.dart';
 import 'package:wom_package/wom_package.dart';
 
 class CardRequest extends StatelessWidget {

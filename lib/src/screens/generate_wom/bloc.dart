@@ -42,7 +42,7 @@ class GenerateWomBloc extends Bloc {
 
   createModelForCreationRequest() async {
     final aim = await aimSelectionBloc.getAim();
-    final String password = passwordController.text;
+//    final String password = passwordController.text;
     final String name = nameController.text;
 
     final WomRequest womRequest = WomRequest(

@@ -9,7 +9,7 @@ import 'package:instrument/src/screens/home/widgets/card_request.dart';
 import 'package:instrument/src/screens/request_confirm/request_confirm.dart';
 import 'package:instrument/src/screens/request_datails/request_datail.dart';
 import 'package:wom_package/wom_package.dart';
-
+import 'package:share/share.dart';
 
 class HomeList extends StatefulWidget {
   final List<WomRequest> requests;
@@ -46,21 +46,22 @@ class _HomeListState extends State<HomeList> {
               actions: <Widget>[
                 MySlideAction(
                   icon: Icons.share,
-                  color: Colors.green,
-                  onTap: () => _showSnackBar(context, 'Share'),
+                  color: Colors.yellow,
+                  onTap: () {
+                    Share.share('${widget.requests[index].deepLink}');
+                  },
                 ),
                 widget.requests[index].status == RequestStatus.COMPLETE
                     ? MySlideAction(
-                  icon: Icons.control_point_duplicate,
-                  color: Colors.indigo,
-                  onTap: () => onDuplicate(index),
-                )
+                        icon: Icons.control_point_duplicate,
+                        color: Colors.indigo,
+                        onTap: () => onDuplicate(index),
+                      )
                     : MySlideAction(
-                  icon: Icons.edit,
-                  color: Colors.orange,
-                  onTap: () => onEdit(index),
-                ),
-
+                        icon: Icons.edit,
+                        color: Colors.orange,
+                        onTap: () => onEdit(index),
+                      ),
               ],
               secondaryActions: <Widget>[
                 MySlideAction(
@@ -82,7 +83,9 @@ class _HomeListState extends State<HomeList> {
         itemCount: widget.requests.length,
         itemBuilder: (context, index) {
           return GestureDetector(
-            onTap: widget.requests[index].status == RequestStatus.COMPLETE ? () => goToDetails(index) : null,
+            onTap: widget.requests[index].status == RequestStatus.COMPLETE
+                ? () => goToDetails(index)
+                : null,
             child: CardRequest(
               request: widget.requests[index],
               onDelete: () => onDelete(index),
@@ -97,13 +100,12 @@ class _HomeListState extends State<HomeList> {
     Scaffold.of(context).showSnackBar(SnackBar(content: Text(text)));
   }
 
-
   goToDetails(int index) {
     Navigator.of(context).push(
       MaterialPageRoute(
         builder: (ctx) => RequestDetails(
-              womRequest: widget.requests[index],
-            ),
+          womRequest: widget.requests[index],
+        ),
       ),
     );
   }
@@ -112,8 +114,8 @@ class _HomeListState extends State<HomeList> {
     Navigator.of(context).push(
       MaterialPageRoute(
         builder: (ctx) => RequestConfirmScreen(
-              womRequest: widget.requests[index].copyFrom(),
-            ),
+          womRequest: widget.requests[index].copyFrom(),
+        ),
       ),
     );
   }
@@ -121,7 +123,8 @@ class _HomeListState extends State<HomeList> {
   onEdit(int index) {
     final provider = BlocProvider(
       child: GenerateWomScreen(),
-      builder:(context)=>  GenerateWomBloc(draftRequest: widget.requests[index]),
+      builder: (context) =>
+          GenerateWomBloc(draftRequest: widget.requests[index]),
     );
     Navigator.of(context).push(MaterialPageRoute(builder: (ctx) => provider));
   }
@@ -169,5 +172,3 @@ class MySlideAction extends StatelessWidget {
     );
   }
 }
-
-

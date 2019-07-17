@@ -4,7 +4,7 @@ import 'package:instrument/src/model/wom_request.dart';
 import 'dart:convert';
 import 'package:instrument/src/services/wom_request/api.dart';
 import 'package:simple_rsa/simple_rsa.dart';
-import 'package:wom_package/wom_package.dart';
+import 'package:wom_package/wom_package.dart' show Config, Flavor, RequestVerificationResponse;
 
 import '../../../app.dart';
 
@@ -20,6 +20,7 @@ class WomRequestRepository {
     try {
       final payloadMap = womRequest.toPayloadMap();
 
+      print("WOM REQUEST ------------- ");
       print(payloadMap);
 
       //encode map to json string
@@ -27,7 +28,8 @@ class WomRequestRepository {
 
 //      final privateKeyString1 = await _loadKey('assets/source.pem');
       final privateKeyString = user.privateKey;
-      final publicKeyString = await _loadKey('assets/registry.pub');
+      final String publicKeyString = await getPublicKey();
+
 //      final publicKeyString = user.publicKey;
 
 //      assert(publicKeyString == publicKeyString1);
@@ -40,8 +42,6 @@ class WomRequestRepository {
         "Nonce": womRequest.nonce,
         "Payload": encrypted,
       };
-      print("requestWomCreation()");
-      print(map);
 
       final responseBody =
           await _apiProvider.requestWomCreation(URL_CREATION_REQUEST, map);
@@ -70,7 +70,8 @@ class WomRequestRepository {
 
     try {
       final String payloadMapEncoded = json.encode(payloadMap);
-      final String publicKeyString = await _loadKey('assets/registry.pub');
+      final String publicKeyString = await getPublicKey();
+
 //      final String publicKeyString = user.publicKey;
 //      assert(publicKeyString == publicKeyString1);
       final String payloadEncrypted =
@@ -89,5 +90,12 @@ class WomRequestRepository {
 
   Future<String> _loadKey(String path) async {
     return await rootBundle.loadString(path);
+  }
+
+  Future<String> getPublicKey() async {
+    if (Config.appFlavor == Flavor.DEVELOPMENT) {
+      return await _loadKey('assets/registry_dev.pub');
+    }
+    return await _loadKey('assets/registry.pub');
   }
 }

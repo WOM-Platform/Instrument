@@ -18,8 +18,8 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   HomeBloc bloc;
-  ScrollController _scrollViewController;
-  GenerateWomBloc _generateWomBloc;
+//  ScrollController _scrollViewController;
+//  GenerateWomBloc _generateWomBloc;
 
   @override
   void initState() {
@@ -72,7 +72,7 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ),
           NestedScrollView(
-            controller: _scrollViewController,
+//            controller: _scrollViewController,
             headerSliverBuilder:
                 (BuildContext context, bool innerBoxIsScrolled) {
               return <Widget>[
@@ -152,7 +152,7 @@ class _HomeScreenState extends State<HomeScreen> {
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add,color:Colors.white),
         onPressed: () async {
-          print(user.publicKey);
+//          print(user.publicKey);
           final provider = BlocProvider(
             child: GenerateWomScreen(),
             builder:(context)=> GenerateWomBloc(draftRequest: null),
