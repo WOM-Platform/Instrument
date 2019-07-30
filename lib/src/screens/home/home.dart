@@ -77,10 +77,10 @@ class _HomeScreenState extends State<HomeScreen> {
                 (BuildContext context, bool innerBoxIsScrolled) {
               return <Widget>[
                 new SliverAppBar(
-                  title: new Text('WOM POS'),
+                  title: new Text('WOM Instrument'),
                   centerTitle: true,
                   pinned: true,
-                  floating: true,
+                  floating: false,
                   forceElevated: innerBoxIsScrolled,
                   actions: <Widget>[
                     IconButton(

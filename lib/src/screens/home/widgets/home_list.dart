@@ -28,8 +28,13 @@ class _HomeListState extends State<HomeList> {
     bloc = BlocProvider.of<HomeBloc>(context);
 
     return ListView.builder(
-        itemCount: widget.requests.length,
+        itemCount: widget.requests.length + 1,
         itemBuilder: (context, index) {
+          if (index == widget.requests.length) {
+            return SizedBox(
+              height: 50,
+            );
+          }
           return GestureDetector(
             onTap: widget.requests[index].status == RequestStatus.COMPLETE
                 ? () => goToDetails(index)
