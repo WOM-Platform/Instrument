@@ -152,7 +152,6 @@ class _HomeScreenState extends State<HomeScreen> {
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add,color:Colors.white),
         onPressed: () async {
-//          print(user.publicKey);
           final provider = BlocProvider(
             child: GenerateWomScreen(),
             builder:(context)=> GenerateWomBloc(draftRequest: null),
