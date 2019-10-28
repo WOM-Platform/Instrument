@@ -41,14 +41,13 @@ class AppDatabase {
     String path = join(documentsDirectory.path, "instrument.db");
     _database = await openDatabase(path, version: 1,
         onCreate: (Database db, int version) async {
-      await AimDbHelper.createAimTable(db);
+      await AimDatabase.createAimTable(db);
       await _createRequestTable(db);
     }, onUpgrade: (Database db, int oldVersion, int newVersion) async {
       await db.execute("DROP TABLE ${Aim.TABLE_NAME}");
       await db.execute("DROP TABLE ${WomRequest.TABLE}");
-      await AimDbHelper.createAimTable(db);
+      await AimDatabase.createAimTable(db);
       await _createRequestTable(db);
-
     });
   }
 

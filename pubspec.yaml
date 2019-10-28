@@ -11,7 +11,7 @@ description: A new Flutter application.
 # In iOS, build-name is used as CFBundleShortVersionString while build-number used as CFBundleVersion.
 # Read more about iOS versioning at
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
-version: 0.0.6+6
+version: 0.0.7+7
 
 environment:
   sdk: ">=2.3.0 <3.0.0"
@@ -24,19 +24,19 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^0.1.2
   http: ^0.12.0+2
-  google_maps_flutter: ^0.5.13
+  google_maps_flutter: ^0.5.21+8
   location: ^2.3.5
-  path_provider: ^0.5.0+1
-  qr_flutter: ^2.0.0+51
-  encrypt: ^2.2.0
+  path_provider: ^1.4.0
+  qr_flutter: ^3.0.1
+  encrypt: ^3.3.1
   uuid: 2.0.0
   simple_rsa: ^0.0.5
   intl:
-  auto_size_text: ^2.0.1
+  auto_size_text: ^2.1.0
   clippy_flutter: ^1.1.0
-  flutter_slidable: ^0.5.3
-  share: ^0.6.2
-  firebase_crashlytics: ^0.1.0+2
+  flutter_slidable: ^0.5.4
+  share: ^0.6.3+1
+  firebase_crashlytics: ^0.1.0+3
   wom_package:
     git:
       url: git://github.com/WOM-Platform/WOM-Package.git

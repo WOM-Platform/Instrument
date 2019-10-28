@@ -74,7 +74,11 @@ class CardRequest extends StatelessWidget {
                 ],
               ),
             ),
-            Expanded(child: Container(color: Colors.yellow,),),
+            Expanded(
+              child: Container(
+                color: Colors.yellow,
+              ),
+            ),
             Container(
               color: Colors.white,
               child: Column(
@@ -239,13 +243,10 @@ class CardRequest2 extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: <Widget>[
                         ItemRow(t1: 'password ', t2: request?.password ?? '-'),
-                        ItemRow(
-                            t1: '- ',
-                            t2: '-'),
+                        ItemRow(t1: '- ', t2: '-'),
                         ItemRow(
                             t1: 'bounding box ',
-                            t2: request?.location?.toString() ??
-                                '-'),
+                            t2: request?.location?.toString() ?? '-'),
                       ],
                     ),
                   ),
@@ -278,19 +279,19 @@ class ItemRow extends StatelessWidget {
       children: <Widget>[
         Expanded(
             child: AutoSizeText(
-              ' $t1',
-              style: TextStyle(color: Colors.grey),
-              maxLines: 1,
-              textAlign: TextAlign.end,
-            )),
+          ' $t1',
+          style: TextStyle(color: Colors.grey),
+          maxLines: 1,
+          textAlign: TextAlign.end,
+        )),
         Expanded(
             child: AutoSizeText(
-              ' $t2',
-              maxLines: 1,
-              minFontSize: 9,
-              stepGranularity: 0.1,
-              style: TextStyle(fontWeight: FontWeight.bold),
-            )),
+          ' $t2',
+          maxLines: 1,
+          minFontSize: 9,
+          stepGranularity: 0.1,
+          style: TextStyle(fontWeight: FontWeight.bold),
+        )),
       ],
     );
   }

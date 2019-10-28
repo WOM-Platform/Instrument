@@ -16,7 +16,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   HomeBloc() {
     _aimRepository = AimRepository();
     _requestDb = WomRequestDb.get();
-    _aimRepository.updateAim(AppDatabase.get().getDb()).then((_) {
+    _aimRepository.updateAim(database: AppDatabase.get().getDb()).then((_) {
       dispatch(LoadRequest());
     });
   }
@@ -27,8 +27,8 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   @override
   Stream<HomeState> mapEventToState(event) async* {
     if (event is LoadRequest) {
-      final List<Aim> aims =
-      await _aimRepository.getFlatAimList(AppDatabase.get().getDb());
+      final List<Aim> aims = await _aimRepository.getFlatAimList(
+          database: AppDatabase.get().getDb());
       final List<WomRequest> requests = await _requestDb.getRequests();
       for (WomRequest r in requests) {
         final Aim aim = aims.firstWhere((a) {

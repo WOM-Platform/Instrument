@@ -156,11 +156,12 @@ class MySlideAction extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SlideAction(
-      child: Container(
-        width: double.infinity,
-        height: double.infinity,
-        padding: const EdgeInsets.symmetric(vertical: 4.0),
+    return Container(
+      width: double.infinity,
+      height: double.infinity,
+      padding: const EdgeInsets.symmetric(vertical: 4.0),
+      child: GestureDetector(
+        onTap: onTap,
         child: Card(
           color: color,
           elevation: 8.0,
@@ -173,7 +174,6 @@ class MySlideAction extends StatelessWidget {
           ),
         ),
       ),
-      onTap: onTap,
     );
   }
 }
