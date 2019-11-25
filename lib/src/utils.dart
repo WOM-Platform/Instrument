@@ -13,6 +13,7 @@ const String lorem =
 
 String generateGUID(){
   var uuid = new Uuid();
-  final guid = uuid.v1buffer(List(16));
-  return Base64Encoder().convert(guid);
+  var buffer = new List<int>(16);
+  uuid.v1buffer(buffer);
+  return buffer.map((v) => v.toRadixString(16).padLeft(2, '0')).join('');
 }
