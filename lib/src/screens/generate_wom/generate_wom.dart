@@ -100,7 +100,7 @@ class _GenerateWomScreenState extends State<GenerateWomScreen> {
               },
             ),
             new FlatButton(
-              child: new Text("Si"),
+              child: new Text("Sì"),
               onPressed: () {
                 Navigator.of(ctx).pop(true);
               },
