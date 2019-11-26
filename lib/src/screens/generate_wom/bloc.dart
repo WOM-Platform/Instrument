@@ -9,6 +9,7 @@ import 'package:mmkv_flutter/mmkv_flutter.dart';
 import 'package:instrument/src/screens/generate_wom/pages/aim_selection/bloc.dart';
 import 'package:wom_package/wom_package.dart';
 
+import '../../../app.dart';
 import '../../constants.dart';
 
 class GenerateWomBloc extends Bloc {
@@ -46,7 +47,7 @@ class GenerateWomBloc extends Bloc {
     final String name = nameController.text;
 
     final WomRequest womRequest = WomRequest(
-      sourceId: "1",
+      sourceId: user.id.toString(),
 //      password: password,
       dateTime: DateTime.now().toUtc(),
       amount: _amount,
